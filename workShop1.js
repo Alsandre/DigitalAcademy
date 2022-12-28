@@ -48,11 +48,11 @@ let arr1 = ['John','Sam','Ann','Will','Andrew','Joseph','Lorelai','Amelie','Den'
 //დამხმარე ფუნქცია შუაში მყოფი ელემენტის ინდექსის მოსაძებნად
 let middleIndexFinder = array => Math.floor(array.length/2);
 
-//დამხმარე ცვლადი ნაპოვნი ინდექსის შესანახად
+//დამხმარე ცვლადი, ნაპოვნი ინდექსის შესანახად
 let middleIndex = middleIndexFinder(arr1);
 
 //პასუხი
-console.log(arr1[middleIndex]);
+console.log(`მოცემული მასივის "ზუსტად" შუაში მდგომი სახელია: ${arr1[middleIndex]}`);
 
 
 //==================================================================================================================
@@ -100,9 +100,21 @@ let fullName = `${student.firstName} ${student.lastName}`;
 student.fullName = fullName;
 
 //კონსოლში გამოგვაქვს საგნების სია
-// for(let i=0; i<student.subjects.length; i++){
-//     console.log(student.subjects[i]);
-// }
+for(let i=0; i<student.subjects.length; i++){
+    console.log(student.subjects[i]);
+}
+
+//კონსოლში საგნების სიის გამოტანის ალტერნატიული მეთოდი
+//დამხმარე ფუნქციის გამოყენებით
+let subjectsLogger = arg => {
+    console.group(`${arg.firstName}ს გავლილი აქვს შემდეგი საგნები:`);
+    for(let i=0; i<arg.subjects.length; i++){
+        console.log(arg.subjects[i]);
+    }
+    console.groupEnd();
+}
+//ვიძახებთ დამხმარე ფუნქციას და ვაწვდით არგუმენტად სტუდენტის ობიექტს
+subjectsLogger(student);
 
 //ვამატებთ 'result'ცვლადს დავალებაში მითითებული მნიშვნელბით
 
@@ -130,7 +142,7 @@ let arr2 = ["Banana", "Orange", "Apple", "Mango",2,12];
 let i = 0;
 
 //პასუხი
-while(typeof(newArr[i]) === 'string'){
+while(typeof(arr2[i]) === 'string'){
     console.log(arr2[i]);
     i++;
 }
@@ -147,12 +159,13 @@ Task 5 :
 
 */
 let arr3 = [12,23,43,11,9,2,121,90];
+let providedValue = 31;
 
 //პასუხი
 for(let i=0; i<arr3.length; i++){
-    if(arr3[i] > 31 && arr3[i]%2 === 0){
-        console.log(`${arr3[i]} Element is greater than provided value and is EVEN`);
-    }else if(arr3[i] < 31 && arr3[i]%2 !== 0){
-        console.log(`${arr3[i]} Element is less than provided value and is ODD`);
+    if(arr3[i] > providedValue && arr3[i]%2 === 0){
+        console.log(`${arr3[i]} Element is greater than provided value (${providedValue}) and is EVEN`);
+    }else if(arr3[i] < providedValue && arr3[i]%2 !== 0){
+        console.log(`${arr3[i]} Element is less than provided value (${providedValue}) and is ODD`);
     };
 }
