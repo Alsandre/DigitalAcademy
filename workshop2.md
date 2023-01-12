@@ -32,43 +32,50 @@ function iterator(val) {
 
 ```javascript
 function checkPythagoras(a, b, c) {
-  let abPowered = a ** 2 + b ** 2;
-  let acPowered = a ** 2 + c ** 2;
-  let bcPowered = b ** 2 + c ** 2;
+
+  // let abPowered = a ** 2 + b ** 2;
+  // let acPowered = a ** 2 + c ** 2;
+  // let bcPowered = b ** 2 + c ** 2;
 
   // SWITCH version
 
   // switch(true) {
   //   case abPowered === c**2:
-  //     console.log(true);
-  //     break;
+  //     return true;
   //   case acPowered === b**2:
-  //     console.log(true);
-  //     break;
+  //     return true;
   //   case bcPowered === a**2:
-  //     console.log(true);
-  //     break;
+  //     return true;
   //   default:
-  //     console.log(false);
+  //     return false
   // }
 
   // IF/Else version
 
   // if((abPowered === c**2) || (acPowered === b**2) || (bcPowered === a**2)){
-  //     console.log(abPowered, acPowered, bcPowered, c**2, b**2, a**2);
-  //     console.log(true);
+  //     return true;
   // }else{
-  //     console.log(false);
+  //     return false;
   // }
 
   // TERNARY version
-  abPowered === c ** 2
-    ? console.log(true)
-    : acPowered === b ** 2
-    ? console.log(true)
-    : bcPowered === a ** 2
-    ? console.log(true)
-    : console.log(false);
+
+  // return abPowered === c ** 2
+  //   ? true
+  //   : acPowered === b ** 2
+  //   ? true
+  //   : bcPowered === a ** 2
+  //   ? true
+  //   : false;
+
+  // SHORT readable version
+
+  // return ((abPowered === c**2) || (acPowered === b**2) || (bcPowered === a**2));
+
+  // THE SHORTEST version
+
+
+  return ((a**2 + b**2) === c**2) || ((a**2 + c**2) === b**2) || ((b**2 + c**2) === a**2);
 }
 ```
 
@@ -82,18 +89,18 @@ function checkPythagoras(a, b, c) {
 
 ```javascript
 function minMax(arr) {
-  let min = 0;
-  let max = 0;
+  let min = arr[0];
+  let max = arr[0];
   for (let element of arr) {
     if (element > max) {
       max = element;
     }
-    if (min === 0 || element < min) {
+    if (element < min) {
       min = element;
     }
   }
   let result = `"Min value is ${min} and Max value is ${max}"`;
-  console.log(result);
+  return result;
 }
 ```
 
@@ -190,8 +197,12 @@ let exampleData = [{name: 'student1', grade : 91}, {name: 'student2', grade : un
 function checkStudentGrade(arr){
     let fLow = 0, fHigh = 50, eLow = 51, eHigh = 60, dLow = 61, dHigh = 70, cLow = 71, cHigh = 80, aLow = 81, aHigh = 100;
 
+let newArr = [];
+for(let element of arr){
+  newArr.push({...element})
+};
 // SWITCH version 
-    for(let element of arr){
+    for(let element of newArr){
         let result = 'Failed';
         switch(true) {
             case element.grade > cHigh:
@@ -213,7 +224,7 @@ function checkStudentGrade(arr){
         }   
         element.finalResult = result 
     }
-    return arr;
+    return newArr;
 
 
 }
