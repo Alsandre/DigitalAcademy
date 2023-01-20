@@ -110,7 +110,7 @@ function ordinalFunction (arr) {
     });
     let result = '';
     for(let el of newArr){
-        result += `${el}\n`;
+        result += `${el}.\n`;
     }
     return result;
 }
@@ -124,8 +124,21 @@ console.log(ordinalFunction(color));
 > ფუნქციამ უნდა დააბრუნოს [15,-22,57] > _/
 
 ```javascript
+// // Utilizing Arry.prototype.filter()
+// let falsyCheck = arr => arr.filter(el => el);
 
-let falsyCheck = arr => arr.filter(el => el);
+// Vanila js
+function falsyCheck (arr) {
+    let resultArray = [];
+    for(let el of arr) {
+        // '!' exclamation mark (aka "bang") logical 'not' operator turns 'true' to 'false' and vice versa
+        // '!!' double exclamation mark is used in JS to turn value into boolean resulting in 'true' for truthy values and 'false' for falsy values
+        if(!!el){
+            resultArray.push(el);
+        }
+    }
+    return resultArray;
+};
 
 ```
 
@@ -138,6 +151,15 @@ let falsyCheck = arr => arr.filter(el => el);
 > დაბრუნებული მნიშვენლობა უნდა იყოს [1,2,3,30] > _/
 
 ```javascript
+// // Set version
+// function mergeArr(arr1,arr2) {
+//     let tempArr = arr1.concat(arr2);
+//     //since javascript set is collection of unique values, it will automaticaly filter out merged array
+//     let tempSet = new Set(tempArr);
+//     return [...tempSet];
+// }
+
+// Vanilla js version (O_o)
 function mergeArr(arr1,arr2) {
     let resArr = arr1.length >= arr2.length ? [...arr1] : [...arr2];
     if(arr1.length >= arr2.length){
@@ -169,13 +191,31 @@ function mergeArr(arr1,arr2) {
 > \*/
 
 ```javascript
+// // Utilizing Arry.prototype.map()
+// let additionMerger = (arr1, arr2) => {
+//     if(arr1.length >= arr2.length){
+//         return arr1.map((el, i) => arr2[i] ? el+arr2[i] : el)
+//     }
+//     if(arr1.length < arr2.length){
+//         return arr2.map((el, i) => arr1[i] ? el+arr1[i] : el)
+//     }
+// }
+
+// Vanilla js version
 let additionMerger = (arr1, arr2) => {
-    if(arr1.length >= arr2.length){
-        return arr1.map((el, i) => arr2[i] ? el+arr2[i] : el)
+  let resultArray = [];
+  let length = arr1.length >= arr2.length ? arr1.length : arr2.length;
+  for (let i = 0; i < length; i++) {
+    if (arr1[i] && arr2[i]) {
+      resultArray.push(arr1[i] + arr2[i]);
+    } else if (arr1[i]) {
+      resultArray.push(arr1[i]);
+    } else if (arr2[i]) {
+      resultArray.push(arr2[i]);
     }
-    if(arr1.length < arr2.length){
-        return arr2.map((el, i) => arr1[i] ? el+arr1[i] : el)
-    }
-}
+  }
+  return resultArray;
+};
+
 console.log(additionMerger([1,10,12,13], [4,5]));
 ```
