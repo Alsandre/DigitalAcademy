@@ -65,7 +65,7 @@ let factory = {
 > 
 
 ```javascript
-let sumOfNumbers = (a, b) => a+b;
+let sumOfNumbers = (...args) => args.reduce((acc, val) => acc+val, 0);
 sumOfNumbers.apply(null, [3, 4]);
 ```
 
