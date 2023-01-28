@@ -98,15 +98,16 @@ console.log(checkIfEven(30));
 > // უნდა გამოვიყენოთ რიგითი რიცხვები წინადადების შესადგენად 1 - first - 1st , 2 - second - 2nd ...
 
 ```javascript
-let color = ["Blue ", "Green", "Red", "Orange", "Violet", "Indigo", "Yellow "];
-let o = ["th","st","nd","rd"];
+let colors = ["Blue ", "Green", "Red", "Orange", "Violet", "Indigo", "Yellow "];
+let colorArr = new Array(122).fill().map(() => colors[Math.floor(Math.random()*colors.length)]);
 function ordinalFunction (arr) {
     let newArr = arr.map((el, i) => {
-        if(i === 0) return `${i+1}${o[1]} choice is ${el}`;
-        else if(i === 1) return `${i+1}${o[2]} choice is ${el}`;
-        else if(i === 2) return `${i+1}${o[3]} choice is ${el}`;
-        else return `${i+1}${o[0]} choice is ${el}`;
-        
+        if(i+1 === 11) return `${i+1}th choice is ${el}`;
+        else if((i+1) === 12) return `${i+1}nd choice is ${el}`;
+        else if((i+1)%10 === 1) return `${i+1}st choice is ${el}`;
+        else if((i+1)%10 === 2) return `${i+1}nd choice is ${el}`;
+        else if((i+1)%10 ===3 ) return `${i+1}rd choice is ${el}`;
+        else return `${i+1}th choice is ${el}`;
     });
     let result = '';
     for(let el of newArr){
@@ -114,7 +115,7 @@ function ordinalFunction (arr) {
     }
     return result;
 }
-console.log(ordinalFunction(color));
+console.log(ordinalFunction(colorArr));
 ```
 
 > **_//Task 5_**
