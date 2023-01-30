@@ -158,25 +158,41 @@ function readyToPutInTheDOM(arr) {
 >[]  -->  0
 >##### ცარიელია
 ```javascript
+// General solution for sequences
+
 // function sequenceCounter(arr) {
-//     arr.map((acc, val, ind, arr) => {
-//         if(ind === 0){
-//             acc.seqCounter = 1;
-//             return acc;
-//         }
+//     let resObj =  arr.reduce((acc, val, ind, arr) => {
 //         if(val === arr[ind-1]){
-//             acc.seqCounter++
+//             acc.seqCounter++;
 //             return acc;
 //         }else if(acc.seqCounter > 3){
 //             acc.counter++;
-//             acc.seqCounter = 0;
+//             acc.seqCounter = 1;
 //             return acc;
 //         }else{
-//             acc.seqCounter = 0;
+//             acc.seqCounter = 1;
 //             return acc
 //         }
-//     }, {counter: 0, seqCounter: 0})
+//     }, {counter: 0, seqCounter: 1});
+//     return resObj.seqCounter > 3 ?  ++resObj.counter : resObj.counter;
 // }
+
+// For sequences of zero
+function sequenceCounter(arr) {
+    let counter =  0;
+    let result = 0
+    for(let element of arr){
+        if(element === 0){
+            counter++;
+        }else{
+            if(counter > 3){
+                result++;
+            }
+            counter = 0;
+        }
+    }
+    return counter > 3 ? ++result : result;
+}
 ```
 ---
 
@@ -199,17 +215,110 @@ function readyToPutInTheDOM(arr) {
 >    if(n < 10) {
 >        return n
 >    } else {
->        
+>        sumOfDigits (n - n%10)
 >    }
 >}
 >```
 ```javascript
+// let sumOfDigits = (n) => n < 10 ? n : n%10 + sumOfDigits(Math.floor(n/10));
 
+// function sumOfDigits(n) {
+//   if (n < 10) {
+//     return n;
+//   } else {
+//     return (
+//       (n - (n % 10 ** (n.toString().length - 1))) /
+//         10 ** (n.toString().length - 1) +
+//       sumOfDigits(n % 10 ** (n.toString().length - 1))
+//     );
+//   }
+// }
 
+function sumOfDigits(n) {
+    let resArr = [];
+    while(n>0){
+        resArr.push(n%10);
+        n=Math.floor(n/10);
+    }
+    return resArr.reduce((acc, el) => acc+el, 0)
+}
 ```
 ># Task 8
 >დაწერეთ TO-DO List , input ველით  
 ```javascript
+let container = document.createElement('div');
+container.style.width = '300px';
+// container.style.height = '50px';
+container.style.backgroundColor = '#ccc';
+container.style.margin = 'auto';
+container.style.padding = '1rem 2rem';
+container.style.display = 'flex';
+container.style.justifyContent = 'center';
+container.style.alignItems = 'center';
+container.style.borderRadius = "25px";
+
+let toDoInput = document.createElement('div');
+toDoInput.style.width = '90%';
+// toDoInput.style.height = '1.5rem';
+toDoInput.style.padding = '0.2rem';
+toDoInput.style.borderRadius = '12px';
+toDoInput.style.backgroundColor = "#ddd";
+toDoInput.style.display = "flex";
+toDoInput.style.flexDirection = "column";
+toDoInput.style.justifyContent = "center";
+toDoInput.style.alignItems = "center";
 
 
+
+let label = document.createElement('lebel');
+label.setAttribute('for', 'input');
+label.setAttribute('value', 'Type your task here');
+label.style.fontWeight = 'bold';
+let labelText = document.createTextNode('Type your task here:');
+label.appendChild(labelText);
+
+let input = document.createElement('input');
+input.setAttribute('id', 'input');
+input.setAttribute('placeHolder', 'Taks...');
+input.style.width = '90%';
+input.style.padding = '0.2rem 0';
+
+let addButton = document.createElement('button');
+addButton.style.width = '90%';
+addButton.style.padding = '0.1rem 1rem';
+addButton.textContent = 'ADD TASK';
+
+toDoInput.appendChild(label);
+toDoInput.appendChild(input);
+toDoInput.appendChild(addButton);
+container.appendChild(toDoInput);
+
+addButton.addEventListener('click', () => {
+  let input = document.getElementById('input');
+  let inputValue = input.value;
+  let newTask = updateList(inputValue);
+  window.document.body.appendChild(newTask);
+})
+window.document.body.appendChild(container);
+
+function updateList (input) {
+  let newEntryContainer = document.createElement('div');
+  newEntryContainer.style.backgroundColor = '#ccc';
+  newEntryContainer.style.width = '300px';
+  newEntryContainer.style.margin = 'auto';
+  newEntryContainer.style.marginTop = '1.5rem';
+  newEntryContainer.style.padding = '1rem 2rem';
+  newEntryContainer.style.display = 'flex';
+  newEntryContainer.style.justifyContent = 'center';
+  newEntryContainer.style.alignItems = 'center';
+  newEntryContainer.style.borderRadius = "25px";
+  
+  let newEntry = document.createElement('p');
+  newEntry.textContent = input;
+  newEntryContainer.appendChild(newEntry)
+  
+  newEntryContainer.addEventListener('click', () => newEntryContainer.style.display = 'none')
+  
+  return newEntryContainer;
+}
 ```
